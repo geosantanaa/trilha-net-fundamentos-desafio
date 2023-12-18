@@ -14,9 +14,18 @@ namespace DesafioFundamentos.Models
 
         public void AdicionarVeiculo()
         {
-            // TODO: Pedir para o usuário digitar uma placa (ReadLine) e adicionar na lista "veiculos"
-            // *IMPLEMENTE AQUI*
+            // TODO: Pedir para o usuário digitar uma placa (ReadLine) e adicionar na lista "veiculos"           
             Console.WriteLine("Digite a placa do veículo para estacionar:");
+            // Implementado
+            string placa = Console.ReadLine();
+
+            // Verificando se a placa é valida
+            if(placa.Length == 8 && placa != null){
+            veiculos.Add(placa);
+            }else{
+                Console.WriteLine("Placa inválida: Utilize o formato: ABC-1234");
+                return;
+            }
         }
 
         public void RemoverVeiculo()
@@ -24,8 +33,9 @@ namespace DesafioFundamentos.Models
             Console.WriteLine("Digite a placa do veículo para remover:");
 
             // Pedir para o usuário digitar a placa e armazenar na variável placa
-            // *IMPLEMENTE AQUI*
-            string placa = "";
+
+            // Implementado
+            string placa = Console.ReadLine();
 
             // Verifica se o veículo existe
             if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
@@ -34,14 +44,23 @@ namespace DesafioFundamentos.Models
 
                 // TODO: Pedir para o usuário digitar a quantidade de horas que o veículo permaneceu estacionado,
                 // TODO: Realizar o seguinte cálculo: "precoInicial + precoPorHora * horas" para a variável valorTotal                
-                // *IMPLEMENTE AQUI*
-                int horas = 0;
-                decimal valorTotal = 0; 
+                
+                // Implementado
+                int horas = Convert.ToInt32(Console.ReadLine());
+
+                // Implementação sugerida para solução do desafio
+                //decimal valorTotal = (precoInicial + precoPorHora) * horas; 
+
+                // Minha solução, considerando que na implementação do instrutor, 
+                // na primeira hora seria cobrado a hora inicial  + a hora adicional, cobrando uma hora adicional a mais
+                decimal valorTotal = precoInicial + (precoPorHora * (horas - 1));
 
                 // TODO: Remover a placa digitada da lista de veículos
-                // *IMPLEMENTE AQUI*
+                 
+                // Implementado
+                veiculos.Remove(placa);
 
-                Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
+                Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal.ToString("F2")}");
             }
             else
             {
@@ -56,7 +75,10 @@ namespace DesafioFundamentos.Models
             {
                 Console.WriteLine("Os veículos estacionados são:");
                 // TODO: Realizar um laço de repetição, exibindo os veículos estacionados
-                // *IMPLEMENTE AQUI*
+        
+                foreach (var veiculos in veiculos){
+                    Console.WriteLine(veiculos);
+                }
             }
             else
             {
